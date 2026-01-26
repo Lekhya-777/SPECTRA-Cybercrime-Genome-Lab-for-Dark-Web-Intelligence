@@ -1,4 +1,4 @@
-# 🔐 CRIMESCAPE-DNA: Bureau-Grade Cyber Intelligence Console
+# 🔐 SPECTRA – Cybercrime Genome Lab for Dark Web Intelligence
 
 A professional, full-stack web application for law enforcement to visualize and track how cybercrime scams evolve in real-time. This system uses AI-powered "DNA markers" to automatically link incidents to fraud families and detect emerging lineages.
 
