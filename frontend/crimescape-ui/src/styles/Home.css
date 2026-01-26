@@ -1,0 +1,137 @@
+.home-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f1419 0%, #1a202c 100%);
+  color: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.home-container .app-container {
+  flex: 1;
+}
+
+.home-content {
+  flex: 1;
+  padding: 3rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.home-hero {
+  text-align: center;
+  margin-bottom: 3rem;
+  animation: fadeIn 0.8s ease-in;
+}
+
+.home-hero h1 {
+  margin: 0;
+  background: linear-gradient(135deg, #00d9ff 0%, #4ade80 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(0, 217, 255, 0.2);
+  letter-spacing: 2px;
+}
+
+.home-hero p {
+  margin: 0;
+  color: #a0a0a0;
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.home-card {
+  text-decoration: none;
+  background: rgba(0, 217, 255, 0.05);
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  padding: 2rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.home-card:hover {
+  background: rgba(0, 217, 255, 0.15);
+  border-color: rgba(0, 217, 255, 0.6);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.home-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: #00d9ff;
+  font-family: 'Courier New', monospace;
+}
+
+.home-card p {
+  margin: 0;
+  color: #a0a0a0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.home-footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid rgba(0, 217, 255, 0.2);
+}
+
+.home-footer p {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .home-content {
+    padding: 2rem 1rem;
+  }
+
+  .home-grid {
+    gap: 1.5rem;
+  }
+
+  .home-card {
+    padding: 1.5rem;
+  }
+
+  .card-icon {
+    font-size: 2.5rem;
+  }
+
+  .home-hero h1 {
+    font-size: 2.5rem !important;
+  }
+}

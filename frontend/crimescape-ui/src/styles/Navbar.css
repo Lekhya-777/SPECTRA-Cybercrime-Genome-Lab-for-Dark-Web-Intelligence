@@ -1,0 +1,228 @@
+.navbar {
+  background: linear-gradient(135deg, #0f1419 0%, #1a202c 100%);
+  border-bottom: 2px solid #2d3748;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #00d9ff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.navbar-brand:hover {
+  color: #4ade80;
+  text-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+}
+
+.logo-icon {
+  font-size: 1.8rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.logo-text {
+  background: linear-gradient(135deg, #00d9ff 0%, #4ade80 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex: 1;
+}
+
+.nav-link {
+  padding: 0.5rem 1.25rem;
+  color: #a0a0a0;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: #00d9ff;
+  background: rgba(0, 217, 255, 0.1);
+}
+
+.nav-link.active {
+  color: #00d9ff;
+  background: rgba(0, 217, 255, 0.15);
+  border-bottom: 2px solid #00d9ff;
+}
+
+.btn-cta {
+  padding: 0.65rem 1.5rem;
+  background: linear-gradient(135deg, #00d9ff 0%, #0099cc 100%);
+  color: #0f1419;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.btn-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 217, 255, 0.3);
+}
+
+.navbar-auth {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.btn-signin {
+  padding: 0.65rem 1.5rem;
+  background: transparent;
+  color: #a0a0a0;
+  border: 2px solid #2d3748;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.btn-signin:hover {
+  color: #00d9ff;
+  border-color: #00d9ff;
+  background: rgba(0, 217, 255, 0.05);
+}
+
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-right: 1rem;
+}
+
+.mobile-menu-btn span {
+  width: 25px;
+  height: 2.5px;
+  background: #00d9ff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-btn.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(12px);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-12px);
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0 1rem;
+    height: auto;
+    min-height: 60px;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .navbar-menu {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: #1a202c;
+    border-bottom: 1px solid #2d3748;
+    flex-direction: column;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .navbar-menu.active {
+    max-height: 400px;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border-radius: 0;
+    border-bottom: 1px solid #2d3748;
+  }
+
+  .nav-link.active {
+    border-bottom: 3px solid #00d9ff;
+  }
+
+  .navbar-auth {
+    order: 3;
+    width: calc(100% - 2rem);
+    margin: 0 1rem 1rem 1rem;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .btn-signin,
+  .btn-cta {
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  .logo-icon {
+    font-size: 1.3rem;
+  }
+
+  .navbar-container {
+    gap: 0;
+  }
+}
