@@ -7,9 +7,12 @@ export default function SidebarAura({ activeView }) {
   const items = [
     { path: "/dashboard", label: "Dashboard" },
     { path: "/shadow-feed", label: "Shadow Feed" },
+    { path: "/incident-form", label: "Submit Incident" },
     { path: "/case-families", label: "Case Families" },
     { path: "/threat-map", label: "Threat Map" },
-    { path: "/reports", label: "Reports" }
+    { path: "/reports", label: "Reports" },
+    { path: "/test-dashboard", label: "Test Dashboard" },
+    { path: "/user-management", label: "User Management" }
   ];
 
   return (

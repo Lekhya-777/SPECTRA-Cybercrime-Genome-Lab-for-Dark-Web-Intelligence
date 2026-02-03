@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from '../contexts/AuthContext';
 import "../styles/Auth.css";
 
 export default function Register() {
   const navigate = useNavigate();
+  const { login } = useAuth(); // Use the auth context to log in after registration
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -58,13 +60,18 @@ export default function Register() {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      // Store user info in localStorage (for demo purposes)
-      localStorage.setItem("user", JSON.stringify({
+      // Create user object and log in
+      const userData = {
         name: formData.name,
-        email: formData.email
-      }));
+        email: formData.email,
+        username: formData.name // Using name as username for simplicity
+      };
       
-      navigate("/intelligence");
+      // Log the user in (this will store in localStorage)
+      login(userData);
+      
+      // Navigate to dashboard instead of intelligence page
+      navigate("/dashboard");
     } catch (err) {
       setErrors({ submit: "Registration failed. Please try again." });
     } finally {

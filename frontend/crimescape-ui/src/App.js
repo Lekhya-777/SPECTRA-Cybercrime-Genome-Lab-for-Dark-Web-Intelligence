@@ -1,5 +1,7 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 import AuraHeader from "./components/AuraHeader";
 import SidebarAura from "./components/SidebarAura";
@@ -8,10 +10,20 @@ import InvestigationView from "./components/InvestigationView";
 import Dashboard from "./components/Dashboard";
 import ThreatMap from "./components/ThreatMap";
 import Reports from "./components/Reports";
+import TestDashboard from "./components/TestDashboard";
+import UserManagement from "./components/UserManagement";
+import IncidentForm from "./components/IncidentForm";
 import Home from "./pages/Home";
+import SignIn from "./pages/SignIn";
 
 function AuraLayout({ children }) {
+  const { isAuthenticated, loading } = useAuth();
   const location = useLocation();
+  
+  // If not authenticated, redirect to sign in
+  if (!isAuthenticated && !loading) {
+    return <Navigate to="/signin" replace />;
+  }
   
   // Extract the active view from the current path
   const pathMap = {
@@ -20,7 +32,8 @@ function AuraLayout({ children }) {
     "/shadow-feed": "shadow-feed",
     "/case-families": "case-families",
     "/threat-map": "threat-map",
-    "/reports": "reports"
+    "/reports": "reports",
+    "/test-dashboard": "test-dashboard"
   };
   
   const activeView = pathMap[location.pathname] || "dashboard";
@@ -45,17 +58,80 @@ function AuraLayout({ children }) {
   );
 }
 
-export default function App() {
+function AppContent() {
+  const { loading } = useAuth();
+
+  // If loading, show a loading screen
+  if (loading) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #0a0f1a 0%, #0c1422 100%)',
+        color: 'white'
+      }}>
+        <div>Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<AuraLayout><Dashboard /></AuraLayout>} />
-        <Route path="/shadow-feed" element={<AuraLayout><ShadowFeed /></AuraLayout>} />
-        <Route path="/case-families" element={<AuraLayout><InvestigationView /></AuraLayout>} />
-        <Route path="/threat-map" element={<AuraLayout><ThreatMap /></AuraLayout>} />
-        <Route path="/reports" element={<AuraLayout><Reports /></AuraLayout>} />
+        <Route path="/signin" element={<SignIn />} />
+        {/* Protected routes */}
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <AuraLayout><Dashboard /></AuraLayout>
+          </ProtectedRoute>
+        } />
+        <Route path="/shadow-feed" element={
+          <ProtectedRoute>
+            <AuraLayout><ShadowFeed /></AuraLayout>
+          </ProtectedRoute>
+        } />
+        <Route path="/incident-form" element={
+          <ProtectedRoute>
+            <AuraLayout><IncidentForm /></AuraLayout>
+          </ProtectedRoute>
+        } />
+        <Route path="/case-families" element={
+          <ProtectedRoute>
+            <AuraLayout><InvestigationView /></AuraLayout>
+          </ProtectedRoute>
+        } />
+        <Route path="/threat-map" element={
+          <ProtectedRoute>
+            <AuraLayout><ThreatMap /></AuraLayout>
+          </ProtectedRoute>
+        } />
+        <Route path="/reports" element={
+          <ProtectedRoute>
+            <AuraLayout><Reports /></AuraLayout>
+          </ProtectedRoute>
+        } />
+        <Route path="/test-dashboard" element={
+          <ProtectedRoute>
+            <AuraLayout><TestDashboard /></AuraLayout>
+          </ProtectedRoute>
+        } />
+        <Route path="/user-management" element={
+          <ProtectedRoute>
+            <AuraLayout><UserManagement /></AuraLayout>
+          </ProtectedRoute>
+        } />
       </Routes>
     </BrowserRouter>
+  );
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
